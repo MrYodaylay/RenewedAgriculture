@@ -1,3 +1,8 @@
 {
-  "item.renewal.peat": "Peat"
+  "item.renewal.peat": "Peat",
+  "item.renewal.poor_soil": "Poor Soil",
+  "item.renewal.basic_soil": "Basic Soil",
+  "item.renewal.improved_soil": "Improved Soil",
+  "item.renewal.rich_soil": "Rich Soil",
+  "item.renewal.premium_soil": "Premium Soil"
 }
