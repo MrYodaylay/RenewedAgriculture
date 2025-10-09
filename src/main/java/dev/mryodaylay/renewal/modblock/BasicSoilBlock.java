@@ -7,10 +7,6 @@ public class BasicSoilBlock extends SoilBlock {
 
         setDefaultState(getDefaultState()
                 .with(MOISTURE, 0)
-                //.with(INTEGRITY, 7)
-                //.with(VITALITY, 7)
-                //.with(VIGOR, 7)
-                //.with(BALANCE, 7)
         );
     }
 

@@ -1,17 +1,21 @@
 package dev.mryodaylay.renewal.modblock;
 
+import com.mojang.serialization.MapCodec;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
+import net.minecraft.block.BlockWithEntity;
+import net.minecraft.block.entity.BlockEntity;
+import net.minecraft.server.world.ServerWorld;
 import net.minecraft.state.StateManager;
 import net.minecraft.state.property.IntProperty;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.random.Random;
+import net.minecraft.util.shape.VoxelShape;
 
-public abstract class SoilBlock extends Block {
+public class SoilBlock extends BlockWithEntity {
 
     public static final IntProperty MOISTURE = IntProperty.of("moisture", 0, 7);
-    //public static final IntProperty INTEGRITY = IntProperty.of("integrity", 0, 7);
-    //public static final IntProperty VITALITY = IntProperty.of("vitality", 0, 7);
-    //public static final IntProperty VIGOR = IntProperty.of("vigor", 0, 7);
-    //public static final IntProperty BALANCE = IntProperty.of("balance", 0, 7);
+    protected static final VoxelShape SHAPE = Block.createCuboidShape(0.0, 0.0, 0.0, 16.0, 15.0, 16.0);
 
     public SoilBlock(Settings settings) {
         super(settings);
@@ -20,10 +24,26 @@ public abstract class SoilBlock extends Block {
     @Override
     protected void appendProperties(StateManager.Builder<Block, BlockState> builder) {
         builder.add(MOISTURE);
-        //builder.add(INTEGRITY);
-        //builder.add(VITALITY);
-        //builder.add(VIGOR);
-        //builder.add(BALANCE);
+    }
+
+    @Override
+    protected MapCodec<? extends BlockWithEntity> getCodec() {
+        return createCodec(SoilBlock::new);
+    }
+
+    @Override
+    protected VoxelShape getCullingShape(BlockState state) {
+        return SHAPE;
+    }
+
+    @Override
+    public BlockEntity createBlockEntity(BlockPos pos, BlockState state) {
+        return new SoilBlockEntity(pos, state);
+    }
+
+    @Override
+    protected void randomTick(BlockState state, ServerWorld world, BlockPos pos, Random random) {
+        super.randomTick(state, world, pos, random);
     }
 
 }

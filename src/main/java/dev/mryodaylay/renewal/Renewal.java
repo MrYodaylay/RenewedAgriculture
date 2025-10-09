@@ -1,5 +1,6 @@
 package dev.mryodaylay.renewal;
 
+import dev.mryodaylay.renewal.modblock.ModBlockEntities;
 import dev.mryodaylay.renewal.modblock.ModBlocks;
 import net.fabricmc.api.ModInitializer;
 
@@ -11,6 +12,7 @@ public class Renewal implements ModInitializer {
     public void onInitialize() {
 
         ModBlocks.init();
+        ModBlockEntities.init();
 
     }
 }
